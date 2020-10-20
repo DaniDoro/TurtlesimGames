@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
   randomNumber2 *= 2;
   randomNumber3 *= 2;
 
-  std::cout << "Hello, welcome back. Please select a box-type by typing either 1, 2, 3 or 4:";
+  std::cout << "Hello, welcome back. Please select a box-type by typing either 1, 2, 3 or 4:" << std::endl;
   std::cin >> first_Float;
   std::cout << "Thanks, the changes are now applied.:" << std::endl;
 
@@ -42,8 +42,19 @@ int main(int argc, char *argv[]) {
   pen_client.call(pen_srv);
 
   turtlesim::TeleportAbsolute srv;
-
-  if(first_Float==1){ 
+  while (box_size > 0)
+  {
+  std::cout << "You have entered my dungeon! Please answer the following question" << std::endl;
+  int q = rand() % 10 + 1;
+  int t = rand() % 10 + 1;
+  int answer = q + t;
+  int useranswer;
+  std::cout << "What is " << q << "+" << t << std::endl;
+  std::cin >> useranswer;
+  if(answer == useranswer)
+  {
+    if(first_Float==1)
+    { 
   srv.request.x = 5.5;
   srv.request.y = 5.5;
   teleport_client.call(srv);
@@ -59,9 +70,13 @@ int main(int argc, char *argv[]) {
   srv.request.y = 5.5;
   teleport_client.call(srv);
 
+   std::cout << "I'm teleporting somewhere... WEEEEEEeeeEEEeeEEEeeeeEEE" << std::endl;
+
   srv.request.x = 5.5;
   srv.request.y = 11;
   teleport_client.call(srv);
+
+   std::cout << "I'm current in the process of teleporting my booty somewhere" << std::endl;
 
   srv.request.x = 11;
   srv.request.y = 5.5;
@@ -73,6 +88,8 @@ int main(int argc, char *argv[]) {
 
   pen_srv.request.off = true;
   pen_client.call(pen_srv);
+
+  std::cout << "I'm almost done!" << std::endl;
 
   srv.request.x = 5.5;
   srv.request.y = 5.5;
@@ -232,6 +249,13 @@ int main(int argc, char *argv[]) {
   pen_srv.request.b = randomNumber3;
   pen_client.call(pen_srv);
   }
-
+  }
+    else if(answer != useranswer)
+    {
+    std::cout << "You failed! i will now terminate you!" << std::endl;
+    break;
+    }
+  }
+  std::cout << "Mommy! i'm done!" << std::endl;
   return 0;
 }
